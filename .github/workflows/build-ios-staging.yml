@@ -1,0 +1,27 @@
+name: Run iOS/pod update
+on:
+  push:
+    tags:
+      - '*'
+jobs:
+  Build-iOS-Staging:
+    # specify macos-11 until it becomes latest
+    runs-on: macos-11
+    steps:
+      - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
+      - run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
+      - run: echo "🔎 The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
+      - uses: actions/checkout@v2
+      - run: echo "💡 The ${{ github.repository }} repository has been cloned to the runner."
+      - run: echo "🖥️ The workflow is now ready to build your project."
+      - name: Install Dependencies
+        run: |
+          yarn install
+          cd ios && pod update --verbose
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 2.7.2 # Not needed with a .ruby-version file
+      - name: Install Dependencies
+        run: |
+          cd ios && pod update --verbose
+
