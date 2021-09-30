@@ -17,11 +17,10 @@ jobs:
       - name: Install Dependencies
         run: |
           yarn install
-          cd ios && pod update --verbose
       - uses: ruby/setup-ruby@v1
         with:
           ruby-version: 2.7.2 # Not needed with a .ruby-version file
-      - name: Install Dependencies
-        run: |
-          cd ios && pod update --verbose
+      - uses: maierj/fastlane-action@v2.0.1
+        with:
+          lane: 'run_pod_update'
 

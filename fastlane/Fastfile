@@ -1,0 +1,17 @@
+# This file contains the fastlane.tools configuration
+# You can find the documentation at https://docs.fastlane.tools
+default_platform(:ios)
+platform :ios do
+    lane :run_pod_update do
+    setup_ci(force: true)
+    # Clean - for local builds on a developer machine
+    clean_build_artifacts
+
+    # pod install
+    cocoapods(
+        podfile: './ios/Podfile',
+        repo_update: true
+    )
+
+    end
+end
